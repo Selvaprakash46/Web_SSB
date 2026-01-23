@@ -46,28 +46,50 @@ public class CheckoutStep {
 
         homePage.closeChildWindowAndSwitchBack();
         homePage.clickOnHomeButton(2);
-        scenario.log("User is on HOme Page");
+        scenario.log("User is on Home Page");
     }
+
     @When("user selects a makeup category from home page")
     public void user_selects_a_makeup_category_from_home_page() {
 
         homePage.clickOnMakeUp();
     }
+
     @When("user clicks the sub category from makeup page")
     public void User_clicks_the_sub_category_from_makeup_page() {
 
         homePage.clickOnFoundation();
     }
+
     @When("user selects a product from plp")
     public void user_selects_a_product_from_plp() {
 
         scenario.log("Product clicked successfully at index 2");
     }
+
     @When("User clicks on the add to bag")
     public void user_clicks_on_the_add_to_bag(){
 
         homePage.validateShadeOrBag();
     }
+    @When("User clicks on another product add to bag")
+    public void user_clicks_on_another_product_add_to_bag(){
+
+        homePage.validateAnotherShadeOrBag();
+    }
+
+    @When("User clicks on the move to bag")
+    public void user_clicks_on_the_move_to_bag(){
+
+        homePage.validateShadeOrMoveToBag();
+    }
+
+    @When("User clicks on the view details")
+    public void user_clicks_on_the_view_details(){
+
+        homePage.validateShadeOrDetails();
+    }
+
     @Then("user validates the price details in the bag")
     public void user_validates_the_price_details_in_the_bag() {
 

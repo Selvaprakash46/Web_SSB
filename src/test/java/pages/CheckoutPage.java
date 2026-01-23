@@ -31,46 +31,13 @@ public class CheckoutPage extends BasePage {
     private final By verify = By.xpath("//button[contains(text(),'VERIFY')]");
 
 
-
-
-
-    public final By productList = By.xpath("//div[@data-product-id]");
-    private final By reviewShop = By.xpath("//div[contains(text(), 'RATE YOUR SHOPPING EXPERIENCE')]");
-    private final By submitButton = By.xpath("//p[contains(text(), 'submit')]");
-    private final By error = By.xpath("//div[contains(text(), 'What do you hate more than a broken item? A 404 error like this one!')]");
-    private final By priceDetails = By.xpath("//div[@class='flex flex-col items-start sm:px-4 md:px-0 md:pt-0 lg:px-0 xs:pt-4 mm:px-0']");
-    private final By outOfStockCheck = By.xpath("//*[contains(translate(text(),'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 'OUT OF STOCK')]");
-    private final By sizeBtn = By.xpath("//div[contains(@class,'overflow-x-auto')]//button");
-//    private final By addToBag = By.xpath("//img[@alt=\"bag_white\"]");
-    private final By addToBag = By.xpath("//p[contains(text(), 'Add to bag')]");
-    private final By popUpViewBag = By.xpath("(//p[contains(text(), 'View Bag')])[2]");
-    private final By viewBag = By.xpath("//p[contains(text(), 'View Bag')]");
-    private final By addressBox = By.xpath("//div[@class=\"rounded-full border border-black p-1\"]");
-    private final By item = By.cssSelector("div[data-state='open'][class*='fixed']");
-
-    private final By containerLocator = By.xpath("//div[@class='md: mt-4 flex flex-col gap-5 md:max-w-[1200px] md:flex-row md:flex-wrap md:justify-between md:gap-6 lg:mt-6 lg:gap-8 xl:gap-[72px]']");
-    private final By deliverInfo = By.xpath("(//div[@class='rounded border border-lightGray p-4'])[2]");
-    private final By paymentMode = By.xpath("//*[contains(text(),'Credit') or contains(text(),'Netbanking') or contains(text(),'Wallets')]");
-    private final By iFrame = By.name("HyperServices");
-    private final By cardBlockLocator = By.xpath("//div[@class='rounded border border-lightGray md:basis-[31%] lg:rounded-lg']");
-    private final By cardBlockEle = By.xpath(".//div | .//p");
-    private final By wallet = By.xpath(   "(//*[text()='Wallets' or normalize-space()='Wallets'])[8]");
-    private final By phonePe = By.xpath("//*[text()='PhonePe' or contains(text(),'Phone Pe')]");
-    private final By proceedBtn = By.xpath("//*[text()='Proceed' or contains(text(),'Proceed')]");
-
-
-    private final By proceedToPay = By.xpath("(//article[contains(text(), 'Proceed to pay ')])[2]");
-    private final By filterLocator = By.xpath("//div[@class='cursor-pointer text-nowrap rounded-[36px] border border-neutral-300 px-2.5 py-3 md:rounded bg-transparent']");
-    private final By ratingContainer = By.cssSelector("svg[data-testid='rating-component-star']:nth-of-type(4)");
-
-
     public CheckoutPage(WebDriver driver) {
         super(driver);
     }
 
     // ---------- Common Actions ----------
     public void clickOnProceedToCheckout() {
-        waitForPresenceOfElement(proceedToCheckout);
+        isElementPresent(proceedToCheckout);
         safeClick(proceedToCheckout);
    }
     public boolean validateEmptyBag() {
@@ -132,15 +99,15 @@ public class CheckoutPage extends BasePage {
 
 
     public void clickOnContinueButton() {
-        waitForPresenceOfElement(continueButton);
+        isElementPresent(continueButton);
         safeClick(continueButton);
     }
     public void selectingTheCODOption() {
-        waitForPresenceOfElement(cod);
+        isElementPresent(cod);
         safeClick(cod);
     }
     public void clickOnPlaceOrder() {
-        waitForPresenceOfElement(placeOrder);
+        isElementPresent(placeOrder);
         safeClick(placeOrder);
     }
     public void printOrderDetails() {
@@ -158,19 +125,19 @@ public class CheckoutPage extends BasePage {
         }
     }
     public void clickOnContinueShopping() {
-        waitForPresenceOfElement(continueShopping);
+        isElementPresent(continueShopping);
         safeClick(continueShopping);
     }
     public void selectingTheUPIOption() {
-        waitForPresenceOfElement(upi);
+        isElementPresent(upi);
         safeClick(upi);
     }
     public void enterTheUPIId(String upi) {
-        waitForPresenceOfElement(editUpi);
+        isElementPresent(editUpi);
         enterTextOnElement(editUpi, upi);
     }
     public void clickOnVerify() {
-        waitForPresenceOfElement(verify);
+        isElementPresent(verify);
         safeClick(verify);
     }
 }

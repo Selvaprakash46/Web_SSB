@@ -7,6 +7,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pages.BasePage;
 import pages.LoginPage;
 import utilities.ConfigLoader;
 import utilities.CredsLoader;
@@ -32,44 +33,72 @@ public class LoginStep {
     @Given("user launches the application")
     public void user_launches_the_application() {
 
-        String url = configLoader.getProperty("prodUrl");
+        String url = configLoader.getProperty("uatUrl");
         loginPage.goTo(url);
-        scenario.log("***** Mobile Application lunched Successfully *****");
+        scenario.log("***** Web Application lunched Successfully *****");
     }
     @When("user clicks the Menu button for Login")
     public void user_clicks_the_menu_button_for_login() {
 
         loginPage.clickOnMenuButton();
     }
-    @When("user enters the valid mobile number")
-    public void user_enters_the_valid_mobile_number() throws InterruptedException {
 
-        Thread.sleep(20000);
+    @When("user hover the profile menu button")
+    public void user_hover_the_profile_menu_button() {
 
-//        String mob = configLoader.getProperty("login.validMob");
-//        loginPage.enterUserID(mob);
-//        scenario.log("user Entered Mobile Number: " + mob);
+        loginPage.hoverOnProfileBtn();
     }
+
+    @When("user enters the valid mobile number")
+    public void user_enters_the_valid_mobile_number()  {
+
+//        Thread.sleep(20000);
+
+        String mob = configLoader.getProperty("login.validMob");
+        loginPage.enterUserID(mob);
+        scenario.log("user Entered Mobile Number: " + mob);
+    }
+
+//    @When("user clicks the Continue button")
+//    public void user_clicks_the_continue_button() {
+//
+//        boolean isVerified = loginPage.clickOnTheContinueButton();
+//
+//        if (loginPage.isElementPresent(loginPage.invalidFormatMsg)) {
+//            Assert.fail("Login failed: Please enter a valid number");
+//        }
+//        if (loginPage.isElementPresent(loginPage.maxOtpAttempts)) {
+//            Assert.fail("Login failed: Maximum OTP attempts exceeded");
+//        }
+//
+//        Assert.assertTrue(isVerified, "Login verification failed unexpectedly");
+//    }
+
     @When("user clicks the Continue button")
     public void user_clicks_the_continue_button() {
 
-        boolean isVerified = loginPage.clickOnTheContinueButton();
+        loginPage.clickOnTheContinueButton();
 
-        if (loginPage.isElementPresent(loginPage.invalidFormatMsg)) {
+        if (loginPage.isElementPresent(loginPage.validFormatMsg)) {
+            scenario.log("Login successful: Number verified successfully, redirected to OTP page");
+
+        } else if (loginPage.isElementPresent(loginPage.invalidFormatMsg)) {
             Assert.fail("Login failed: Please enter a valid number");
-        }
-        if (loginPage.isElementPresent(loginPage.maxOtpAttempts)) {
-            Assert.fail("Login failed: Maximum OTP attempts exceeded");
-        }
-        Assert.assertTrue(isVerified, "Login verification failed unexpectedly");
-    }
-    @Then("user enters the OTP")
-    public void user_enters_the_otp() throws InterruptedException {
 
-        Thread.sleep(20000);
-//        String otp = configLoader.getProperty("login.staticOtp");
-//        loginPage.enterOTP(otp);
-//        scenario.log("user Entered the OTP: " + otp);
+        } else if (loginPage.isElementPresent(loginPage.maxOtpAttempts)) {
+            Assert.fail("Login failed: Maximum OTP attempts exceeded");
+
+        } else {
+            Assert.fail("Login failed: Unexpected error");
+
+        }
+    }
+
+    @Then("user enters the OTP")
+    public void user_enters_the_otp() {
+        String otp = configLoader.getProperty("login.staticOtp");
+        loginPage.enterOTP(otp);
+        scenario.log("user Entered the OTP: " + otp);
     }
     @Then("user validates otp result")
     public void user_validates_otp_result() {
@@ -99,10 +128,12 @@ public class LoginStep {
 
         loginPage.clickOnLogout();
     }
+
     @Then("validate that the user is logged out")
-    public void validate_that_the_user_is_logged_out() {
+    public void validate_that_the_user_is_logged_out() throws InterruptedException {
 
         scenario.log("Successfully logged out");
+
     }
 
     //OTP Validation
@@ -113,6 +144,14 @@ public class LoginStep {
         loginPage.enterUserID(mob);
         scenario.log("user Entered Mobile Number: " + mob);
     }
+
+    @When("user validate login id entry page")
+    public void user_validate_login_id_entry_page() {
+
+        loginPage.ValidateUserID();
+        scenario.log("Login id entry is present");
+    }
+
     @Then("user validates otp result for invalid otp")
     public void user_validates_otp_result_for_invalid_otp() {
 
@@ -138,9 +177,9 @@ public class LoginStep {
     @Then("user enters the invalid OTP")
     public void user_enters_the_invalid_otp() {
 
-        String otp = configLoader.getProperty("login.invalidOtp");
-        loginPage.enterOTP(otp);
-        scenario.log("user Entered the OTP: " + otp);
+//        String otp = configLoader.getProperty("login.invalidOtp");
+//        loginPage.enterOTP(otp);
+//        scenario.log("user Entered the OTP: " + otp);
     }
 
     //Invalid User ID
@@ -151,10 +190,11 @@ public class LoginStep {
         loginPage.enterUserID(mob);
         scenario.log("User Entered Mobile Number: " + mob);
     }
+
     @When("user clicks the Continue button for invalid number validates")
     public void user_clicks_the_continue_button_for_invalid_number_validates() {
 
-        boolean isVerified = loginPage.clickOnTheContinueButton();
+        boolean isVerified = loginPage.clickOnTheContinueButtonInvalidNo();
 
         if (!isVerified && loginPage.isElementPresent(loginPage.invalidFormatMsg)) {
             scenario.log("Expected validation message displayed: Please enter a valid number");
@@ -163,6 +203,7 @@ public class LoginStep {
         }
         Assert.assertTrue(isVerified, "Login verification failed unexpectedly");
     }
+
     @Then("validate that the appropriate error message is displayed")
     public void validate_that_the_appropriate_error_message_is_displayed() {
 

@@ -51,7 +51,6 @@ public class DriverFactory {
     public static void quitDriver() {
         if(driver != null) {
             driver.quit();
-            driver = null;
         }
     }
 }

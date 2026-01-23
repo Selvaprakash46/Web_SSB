@@ -43,18 +43,13 @@ public class HomeStep {
     }
     @Given("User validate that product added to wishlist")
     public void user_validate_that_product_added_to_wishlist() {
-
+        cartPage.validateErrorMessageByPartialText("Product successfully added to your wishlist", "Product successfully added to your wishlist");
         scenario.log("Product is added to the wishlist");
     }
     @Given("User remove a product to the wishlist from PLP")
     public void user_remove_a_product_to_the_wishlist_from_plp() {
 
         homePage.clickOnAddWishlist();
-    }
-    @Then("user removes a product to the wishlist")
-    public void user_removes_a_product_to_the_wishlist() {
-
-        cartPage.clickOnRemoveItem();
     }
     @Then("User validate that product removed from wishlist")
     public void user_validate_that_product_removed_from_wishlist() {

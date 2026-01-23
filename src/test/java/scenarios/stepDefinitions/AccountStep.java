@@ -53,7 +53,6 @@ public class AccountStep {
                 accountPage.manageAddress,
                 accountPage.fcc,
                 accountPage.myWallet,
-                accountPage.savedPayments,
                 accountPage.helpAndSupport,
                 accountPage.privacyPolicy,
                 loginPage.logout
@@ -84,6 +83,29 @@ public class AccountStep {
         List<By> cartOptions = Arrays.asList(
                 accountPage.firstConnect,
                 accountPage.silver,
+                accountPage.golden,
+                accountPage.platinum,
+                accountPage.black
+        );
+        scenario.log("Actual Components: " + actualCom);
+        for (By option : cartOptions) {
+            if (!accountPage.isElementPresent(option)) {
+                accountPage.scrollDown();
+            }
+            if (!accountPage.isElementPresent(option)) {
+                Assert.assertTrue(accountPage.isElementPresent(option),
+                        "FCC Component not displayed: " + accountPage.isElementPresent(option));
+                scenario.log("FCC Options: " + accountPage.isElementPresent(option));
+            }
+        }
+    }
+    @When("system should display the following components in the FCC section after clicking strip banner")
+    public void system_should_display_the_following_components_in_the_FCC_section_after_clicking_strip_banner(DataTable dataTable) {
+
+        List<String> actualCom = dataTable.asList();
+        List<By> cartOptions = Arrays.asList(
+                accountPage.firstConnectBadge,
+                accountPage.silverBadge,
                 accountPage.golden,
                 accountPage.platinum,
                 accountPage.black

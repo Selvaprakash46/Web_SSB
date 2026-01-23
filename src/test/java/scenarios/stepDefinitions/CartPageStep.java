@@ -53,11 +53,41 @@ public class CartPageStep {
 
         homePage.clickOnConditioner();
     }
+
+    @Given("user clicks SSBeauty logo to return to homepage")
+    public void user_clicks_SSBeauty_logo_to_return_to_homepage() {
+
+        cartPage.clickOnSSBeautyLogo(1);
+        scenario.log("User is on Home Page");
+    }
+
+    @When("user selects a skin category from home page")
+    public void user_selects_a_skin_category_from_home_page() {
+
+        homePage.clickOnSkin();
+    }
+    @When("user clicks the sub category from skin page")
+    public void User_clicks_the_sub_category_from_skin_page() {
+
+        homePage.clickOnFacial();
+    }
     @When("user clicks on the cart icon in the header")
     public void user_clicks_on_the_cart_icon_in_the_header() {
 
         cartPage.clickOnCartIcon();
     }
+
+    @When("user clicks on the view all from your wishlist in cart page")
+    public void user_clicks_on_the_view_all_from_your_wishlist_in_cart_page() {
+
+        cartPage.clickOnWishlistViewAll();
+    }
+
+    @When("user clicks on the wishlist icon in the header")
+    public void user_clicks_on_the_wishlist_icon_in_the_header() {
+        cartPage.clickOnWishlistIcon();
+    }
+
     @When("user validate that cart is not empty")
     public void User_validate_that_cart_is_not_empty() {
 
@@ -66,7 +96,16 @@ public class CartPageStep {
             Assert.fail("Test Failed because cart is empty: " + msg);
         }
         scenario.log("Cart has items, continuing...");
+    }
 
+    @When("user validate that wishlist is not empty")
+    public void User_validate_that_wishlist_is_not_empty() {
+
+        if(cartPage.isElementPresent(cartPage.emptyWishlist)) {
+            String msg = "Your Wishlist is Empty";
+            Assert.fail("Test Failed because wishlist is empty: " + msg);
+        }
+        scenario.log("Wishlist has items, continuing...");
     }
 
     // Cart Page Components
@@ -85,6 +124,16 @@ public class CartPageStep {
 
         cartPage.adjustQuantity(2, true, cartPage.increaseQuan);
     }
+
+    @When("user validate increase and decrease product quantity in the cart")
+    public void user_validate_increase_and_decrease_product_quantity_in_the_cart() throws InterruptedException {
+
+        cartPage.validateIncreaseQuan();
+        scenario.log("Increase quantity option is present");
+        cartPage.validateDecreaseQuan();
+        scenario.log("Decrease quantity option is present");
+    }
+
     @When("user decrease the product quantity in the cart")
     public void user_decrease_the_product_quantity_in_the_cart() throws InterruptedException {
 
@@ -119,6 +168,10 @@ public class CartPageStep {
     }
 
     // PinCode check on the cart page
+    @When("user clicks change address button")
+    public void user_clicks_change_address_button() {
+
+    }
     @Then("user clicks on the check option to validate the postal code")
     public void user_clicks_on_the_check_option_to_validate_the_postal_code() {
 

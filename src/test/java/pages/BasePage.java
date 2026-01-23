@@ -10,6 +10,8 @@ import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static factory.DriverFactory.driver;
+
 public class BasePage {
     protected final WebDriver driver;
     protected final WebDriverWait wait;
@@ -46,6 +48,26 @@ public class BasePage {
         driver.findElement(element).sendKeys(value);
     }
 
+    public void enterTextOnElementPinCode(By element, String value) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+//        driver.findElement(element).click();
+        driver.findElement(element).sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        driver.findElement(element).sendKeys(Keys.BACK_SPACE);
+        driver.findElement(element).sendKeys(value);
+    }
+
+    public void enterKeywordOnElement(By element, String value) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+//        driver.findElement(element).click();
+//        driver.findElement(element).sendKeys(Keys.chord(Keys.CONTROL, "a"));
+//        driver.findElement(element).sendKeys(Keys.BACK_SPACE);
+        driver.findElement(element).clear();
+        driver.findElement(element).sendKeys(value);
+        driver.findElement(element).sendKeys(Keys.ENTER);
+    }
+
     public void switchToDefaultContent() {
         driver.switchTo().defaultContent();
     }
@@ -61,7 +83,7 @@ public class BasePage {
         clickOnElement(By.xpath("//*[contains(text(),'" + button + "')]"));
     }
 
-    public void scrollup(int x, int y) {
+    public void scrollUp(int x, int y) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(" + x + "," + y + ")", "");
     }
@@ -99,7 +121,8 @@ public class BasePage {
             js.executeScript(
                     "let modal = document.querySelector('div[role=\"dialog\"]');" +
                             "if(modal){ modal.scrollTop += 500; }");
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     public void moveToElement(By locator) {
@@ -135,7 +158,8 @@ public class BasePage {
             }
             // Switch back to parent
             driver.switchTo().window(parentWindow);
-        } else {}
+        } else {
+        }
     }
 
     public void scrollToElement(By locator) {
@@ -154,7 +178,8 @@ public class BasePage {
 
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             wait.until(ExpectedConditions.invisibilityOfElementLocated(overlayLocator));
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     public void validateErrorMessageByPartialText(String partialText, String expectedText) {
@@ -230,4 +255,51 @@ public class BasePage {
                 .distinct()
                 .collect(Collectors.toList());
     }
+
+    public void hoverOnElement(By locator) {
+        waitForPresenceOfElement(locator);
+        WebElement element = driver.findElement(locator);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
+    }
+
+    public void scrollAndClickUsingJS(By locator) {
+        try {
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", element);
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+        } catch (Exception e) {
+            System.out.println("Failed to scroll and click using JS for locator: " + locator);
+            e.printStackTrace();
+        }
+    }
+
+    public void waitFor(double i) {
+        long j = (long) (i * 1000);
+        try {
+            Thread.sleep(j);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void validateElementText(By locator, String expectedText) {
+
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        Assert.assertTrue(element.isDisplayed(), "Element is not visible");
+        Assert.assertEquals(element.getText().trim(), expectedText, "Text validation failed");
+    }
+
+    public String getValue(By locator) {
+        WebElement element = driver.findElement(locator);
+        return element.getText();
+    }
+
+    public double getNumericValue(By locator) {
+        String text = getValue(locator);
+        return Double.parseDouble(
+                text.replaceAll("[^0-9.]", "")
+        );
+    }
+
 }

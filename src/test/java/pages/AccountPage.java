@@ -27,7 +27,9 @@ public class AccountPage extends BasePage {
     public final By helpAndSupport = By.xpath("//li[contains(text(),'Help & Support')]");
     public final By privacyPolicy = By.xpath("//li[contains(text(),'Privacy Policy')]");
     public final By firstConnect = By.xpath("(//p[contains(text(),'FIRST CONNECT')])[2]");
+    public final By firstConnectBadge = By.xpath("//p[contains(text(),'FIRST CONNECT')]");
     public final By silver = By.xpath("(//p[contains(text(),'SILVER EDGE')])[2]");
+    public final By silverBadge = By.xpath("//p[contains(text(),'SILVER EDGE')]");
     public final By golden = By.xpath("//p[contains(text(),'GOLDEN GLOW')]");
     public final By platinum = By.xpath("//p[contains(text(),'PLATINUM AURA')]");
     public final By black = By.xpath("//p[contains(text(),'BLACK')]");
@@ -62,11 +64,12 @@ public class AccountPage extends BasePage {
     }
 
     public void clicksOnFCC() {
-        waitForPresenceOfElement(fcc);
+        isElementPresent(fcc);
         safeClick(fcc);
     }
 
     public void moveToProfile() {
+        isElementPresent(profile);
         WebElement el = retryGetElement(profile);
         js.executeScript("arguments[0].scrollIntoView({block:'center'});", el);
     }
@@ -152,7 +155,7 @@ public class AccountPage extends BasePage {
     }
 
     public void clickOnAddAddress() {
-        waitForPresenceOfElement(addAdd);
+        isElementPresent(addAdd);
         safeClick(addAdd);
     }
 
@@ -161,22 +164,22 @@ public class AccountPage extends BasePage {
     }
 
     public void clickOnEdit() {
-        waitForPresenceOfElement(editOption);
+        isElementPresent(editOption);
         safeClick(editOption);
     }
 
     public void clickOnUpdateAddress() {
-        waitForPresenceOfElement(updateAddress);
+        isElementPresent(updateAddress);
         safeClick(updateAddress);
     }
 
     public void clickOnRemove() {
-        waitForPresenceOfElement(deleteAddress);
+        isElementPresent(deleteAddress);
         safeClick(deleteAddress);
     }
 
     public void clickOnConfirmRemoveButton() {
-        waitForPresenceOfElement(confirmDelete);
+        isElementPresent(confirmDelete);
         safeClick(confirmDelete);
     }
 }

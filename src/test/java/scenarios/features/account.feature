@@ -1,9 +1,10 @@
-@account
 Feature: Verify the Account Module in the Application
 
-  @smoke @sanity 
-  Scenario: Verify the sign-in functionality via phone number for an existing user
+  Background:
     Given user launches the application
+
+  @smoke @sanity @failure
+  Scenario: Verify the sign-in functionality via phone number for an existing user
     When user clicks the Menu button for Login
     And user enters the valid mobile number
     And user clicks the Continue button
@@ -13,21 +14,32 @@ Feature: Verify the Account Module in the Application
 
   @smoke @sanity
   Scenario: Verify components of Account
-    Given user clicks the Menu button for Login
-    When user navigates to My Profile
+    When user clicks the Menu button for Login
+    And user enters the valid mobile number
+    And user clicks the Continue button
+    Then user enters the OTP
+    And user validates otp result
+    And system should display the appropriate login status
+    When user hover the profile menu button
     Then system should display the following components in the Account section
       | Profile             |
       | My Orders           |
       | Manage Address      |
       | First Citizen Club  |
       | My Wallet           |
-      | Saved Payments      |
       | Help & Support      |
       | Privacy Policy      |
       | Logout              |
 
   @smoke @sanity
   Scenario: Verify components of FCC page
+    When user clicks the Menu button for Login
+    And user enters the valid mobile number
+    And user clicks the Continue button
+    Then user enters the OTP
+    And user validates otp result
+    And system should display the appropriate login status
+    When user hover the profile menu button
     And user clicks the First citizen club
     When system should display the following components in the FCC section
       | FIRST CONNECT |
@@ -36,9 +48,15 @@ Feature: Verify the Account Module in the Application
       | PLATINUM AURA |
       | BLACK         |
 
-  @sanity
+  @sanity @account
   Scenario: Verify CRUD on the Address page
-    When user navigates to My Profile
+    When user clicks the Menu button for Login
+    And user enters the valid mobile number
+    And user clicks the Continue button
+    Then user enters the OTP
+    And user validates otp result
+    And system should display the appropriate login status
+    When user hover the profile menu button
     And user clicks on the my Profile option
     And user update their first name
     And user update their last name

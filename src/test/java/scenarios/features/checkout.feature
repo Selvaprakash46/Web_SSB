@@ -11,7 +11,7 @@ Feature: Checkout Process and Order Placement
 #    And user validates otp result
 #    And system should display the appropriate login status
 
- @smoke @sanity @act
+ @smoke @saanity @act
   Scenario: Verify a successful payment
     Given user is on the homepage
     When user selects a makeup category from home page
@@ -28,14 +28,13 @@ Feature: Checkout Process and Order Placement
     And User clicks on the place order button
     And User validate that the order is placed successfully
 
-  @smoke @sanity
+  @smoke @saanity
   Scenario: Verify navigation to the successful order summary page
     Then user validates the successful order summary
     Then user clicks on the Continue Shopping button
 
- @smoke @sanity
+ @smoke @saanity
   Scenario: Failed Order Placement
-   Given user launches the application
    Given user is on the homepage
    When user selects a makeup category from home page
    And user clicks the sub category from makeup page

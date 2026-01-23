@@ -17,4 +17,6 @@ public class TestContext {
     public CheckoutPage checkoutPage;
     public HeaderPage headerPage;
     public HomePage homePage;
+    public GuestUserPage guestUserPage;
+    public WishlistPage wishlistPage;
 }

@@ -1,0 +1,181 @@
+Feature: Verify the guest user Functionality
+
+  Background:
+    Given user launches the application
+
+  @sanity
+  Scenario: Verifying all the components in homepage for guest user
+    Given user is on the homepage
+    Then User validates categories from homepage
+    And User validates search from homepage
+
+  @sanity
+  Scenario: Verifying homepage navigation for guest user
+    Given user is on the homepage
+    When user selects a makeup category from home page
+    And user clicks the sub category from makeup page
+    Then user is on the homepage
+    And User validates footer from homepage
+
+  @sanity
+  Scenario: Verifying search functionality in guest mode
+    Given user is on the homepage
+    Then user enters keyword in searchBox
+    And User validates makeup label from makeup PLP
+
+  @sanity
+  Scenario: Verifying strip banner and navigation to FCC page with benefits as guest user
+    Given user is on the homepage
+    Then user clicks strip banner
+    And user enters the valid mobile number
+    And user clicks the Continue button
+    Then user enters the OTP
+    And user validates otp result
+    And system should display the appropriate login status
+    When system should display the following components in the FCC section after clicking strip banner
+      | FIRST CONNECT |
+      | SILVER EDGE   |
+      | GOLDEN GLOW   |
+      | PLATINUM AURA |
+      | BLACK         |
+
+  @sanity
+  Scenario: Verifying guest can add product to cart from PLP
+    Given user is on the homepage
+    When user selects a makeup category from home page
+    And user clicks the sub category from makeup page
+    And user selects a product from plp
+    And User clicks on the add to bag
+    When user clicks on the cart icon in the header
+    And user validate that cart is not empty
+    Then system should display the following components on the cart page
+      | Bag          |
+      | Address      |
+      | Payment      |
+      | Best coupons for you |
+
+  @sanity
+  Scenario: Verifying guest user can add product to cart from PDP
+    Given user is on the homepage
+    When user selects a makeup category from home page
+    And user clicks the sub category from makeup page
+    And user selects a product from plp
+    And User clicks on the view details
+    And User switch new window
+    And User clicks on the add to bag in PDP
+    When user clicks on the cart icon in the header
+    And user validate that cart is not empty
+    Then system should display the following components on the cart page
+      | Bag          |
+      | Address      |
+      | Payment      |
+      | Best coupons for you |
+
+  @sanity
+  Scenario: Verifying cart page loads for guest user
+    Given user is on the homepage
+    When user selects a makeup category from home page
+    And user clicks the sub category from makeup page
+    And user selects a product from plp
+    And User clicks on the add to bag
+    When user clicks on the cart icon in the header
+    And user validate that cart is not empty
+    And user validates product remove x mark
+    And user validate increase and decrease product quantity in the cart
+#    Then user validates the price details in the bag
+    When User clicks on the proceed to pay
+    And user validate login id entry page
+
+  @sanity
+  Scenario: Verifying guest user is prompted to log in when clicking the Wishlist icon
+    Given user is on the homepage
+    When user clicks on the wishlist icon in the header
+    And user enters the valid mobile number
+    And user clicks the Continue button
+    Then user enters the OTP
+    And user validates otp result
+    And system should display the appropriate login status
+    And user validate that wishlist is not empty
+
+    @sanity
+    Scenario: Verifying PLP loads relevant products
+      Given user is on the homepage
+      When user selects a skin category from home page
+      And user clicks the sub category from skin page
+      And user validates products sort by
+      Then User clicks on the price high to low from sort by
+      And Validate high to low price in sort by
+      Then User clicks on brand filter
+      And User selects arcelia filter from brand
+      And User validate arcelia label from filtered brand
+      Then User add first PLP product as wishlist
+      And user validate login id entry page
+
+    @sanity
+    Scenario: Verifying PDP loads for guest user
+      Given user is on the homepage
+      When user selects a makeup category from home page
+      And user clicks the sub category from makeup page
+      And user selects a product from plp
+      And User clicks on the view details
+      And User switch new window
+      Then system should display the following components on the PDP page
+        | prize           |
+        | offer           |
+        | description     |
+        | similar product |
+        | review          |
+      Then User add product to wishlist in PDP
+      And user validate login id entry page
+      Then User clicks close in login page
+      And User clicks on the add to bag in PDP
+      When user clicks on the cart icon in the header
+      And user validate that cart is not empty
+
+    @sanity
+    Scenario: Verifying guest user can add product to cart from PDP and Cart Widgets
+      Given user is on the homepage
+      When user selects a makeup category from home page
+      And user clicks the sub category from makeup page
+      And user selects a product from plp
+      And User clicks on the view details
+      And User switch new window
+      And User clicks on the add to bag in PDP
+      When user clicks on the cart icon in the header
+      And user validate that cart is not empty
+      Then system should display the following components on the cart page
+        | Bag          |
+        | Address      |
+        | Payment      |
+        | Best coupons for you |
+      And User clicks on the move to bag
+      And User validate the products in cart
+      Then User validate the product count in cart
+
+    @sanity @guest
+    Scenario: Verifying cart page loads for guest user
+      Given user is on the homepage
+      When user selects a makeup category from home page
+      And user clicks the sub category from makeup page
+      And user selects a product from plp
+      And User clicks on the add to bag
+      When user clicks on the cart icon in the header
+      And user validate that cart is not empty
+      And User validate the product in cart
+      And User clicks on the proceed to pay
+      And user enters the valid mobile number
+      And user clicks the Continue button
+      Then user enters the OTP
+      And user validates otp result
+      And User validate the product in cart
+
+
+      ### Wishlist Feature testcase - Guest User ###
+
+    @sanity
+    Scenario: Verifying guest user gets login prompt when performing wishlist actions
+      When user selects a skin category from home page
+      Then user clicks the sub category from skin page
+      And User adds a product to the wishlist from PLP
+      And User validate that product added to wishlist
+      And user validate login id entry page

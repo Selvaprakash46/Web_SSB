@@ -15,14 +15,20 @@ public class HomePage extends BasePage{
     // ---------- Locators ----------
     private final By homeButton = By.xpath("//img[@alt='Image 1']");
     private final By category = By.xpath("//a[contains(text(),'Categories')]");
+    private final By search = By.xpath("//input[@placeholder='Search']");
     private final By makeUp = By.xpath("//span[contains(text(),'Makeup')]");
     private final By foundation = By.xpath("//p[contains(text(),'Foundations')]");
     public final By productList = By.xpath("//div[@data-item-type='ProdctSCCard']");
+    public final By anotherProductList = By.xpath("(//div[@data-item-type='ProdctSCCard'])[3]");
     private final By shade = By.xpath("//button[contains(text(),'Select Shade')]");
     private final By shadePopup = By.xpath("(//div[@class='MuiBox-root css-rs1ufz'])[2]");
     private final By addToBag = By.xpath("//button[contains(text(),'Add To Bag')]");
+    private final By moveToBag = By.xpath("//button[contains(text(),'Move To Bag')]");
+    private final By viewDetails = By.xpath("//button[contains(text(),'View Details')]");
     private final By hair = By.xpath("(//span[contains(text(),'Hair')])[1]");
     private final By conditioners = By.xpath("(//p[contains(text(),'Conditioners')])[2]");
+    private final By skin = By.xpath("//span[contains(text(),'Skin')]");
+    private final By facial = By.xpath("//p[contains(text(),'Facial Wipes')]");
     private final By addWishlist = By.xpath("(//div[@class='MuiGrid-root css-shd5b'])[5]");
     private final By lowToHigh = By.xpath("(//input[@type='radio'])[2]");
     public final By highToLow = By.xpath("(//input[@type='radio'])[3]");
@@ -35,23 +41,36 @@ public class HomePage extends BasePage{
 
 
 
-
-
-
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
     // ---------- Common Actions ----------
     public void clickOnHomeButton(int max) {
-        waitForPresenceOfElement(homeButton);
+        driver.navigate().refresh();
+        isElementPresent(homeButton);
         for (int i = 0; i < max; i++) {
             safeClick(homeButton);
         }
     }
+
     public void clickOnCategory() {
-        waitForPresenceOfElement(category);
+        isElementPresent(category);
         moveToElement(category);
+    }
+    public void validateCategory() {
+        isElementPresent(category);
+    }
+
+    public void validateSearch() {
+        isElementPresent(search);
+    }
+
+    public void enterKeywordInSearchBox() {
+        isElementPresent(search);
+        safeClick(search);
+        waitFor(2);
+
     }
     public void clickOnMakeUp() {
         clickOnCategory();
@@ -63,6 +82,11 @@ public class HomePage extends BasePage{
         isWebElementDisplayed(hair);
         moveToElement(hair);
     }
+    public void clickOnSkin() {
+        clickOnCategory();
+        isWebElementDisplayed(skin);
+        moveToElement(skin);
+    }
     public void clickOnFoundation() {
         isElementPresent(foundation);
         safeClick(foundation);
@@ -71,21 +95,78 @@ public class HomePage extends BasePage{
         isElementPresent(conditioners);
         safeClick(conditioners);
     }
+    public void clickOnFacial() {
+        isElementPresent(facial);
+        safeClick(facial);
+    }
+
     public void moveToProduct() {
-        waitForPresenceOfElement(productList);
+        isElementPresent(productList);
         moveToElement(productList);
     }
+
+    public void moveToAnotherProduct() {
+        isElementPresent(anotherProductList);
+        moveToElement(anotherProductList);
+    }
+
     public void validateShadeOrBag() {
         try {
             moveToProduct();
 
             if (isElementPresent(shade)) {
                 safeClick(shade);
-                waitForPresenceOfElement(shadePopup);
+                isElementPresent(shadePopup);
                 safeClick(shadePopup);
             }
             if (isElementPresent(addToBag)) {
                 safeClick(addToBag);
+            }
+        } catch (Exception e) {}
+    }
+
+    public void validateAnotherShadeOrBag() {
+        try {
+            moveToAnotherProduct();
+
+            if (isElementPresent(shade)) {
+                safeClick(shade);
+//                isElementPresent(shadePopup);
+//                safeClick(shadePopup);
+            }
+            if (isElementPresent(addToBag)) {
+                safeClick(addToBag);
+            }
+        } catch (Exception e) {}
+    }
+
+    public void validateShadeOrMoveToBag() {
+        try {
+            moveToProduct();
+
+            if (isElementPresent(shade)) {
+                safeClick(shade);
+                isElementPresent(shadePopup);
+                safeClick(shadePopup);
+            }
+            if (isElementPresent(moveToBag)) {
+                safeClick(moveToBag);
+            }
+        } catch (Exception e) {}
+    }
+
+    public void validateShadeOrDetails() {
+
+        try {
+            moveToProduct();
+
+            if (isElementPresent(shade)) {
+                safeClick(shade);
+                isElementPresent(shadePopup);
+                safeClick(shadePopup);
+            }
+            if (isElementPresent(viewDetails)) {
+                safeClick(viewDetails);
             }
         } catch (Exception e) {}
     }
@@ -122,9 +203,6 @@ public class HomePage extends BasePage{
         isElementPresent(change);
         safeClick(change);
     }
-
-
-
 
     public boolean clickProductByIndex(By locator,int index) {
         try {
