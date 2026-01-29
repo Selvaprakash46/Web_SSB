@@ -70,6 +70,14 @@ public class GuestUserStep {
         scenario.log("user Entered the keyword: " + keyword);
     }
 
+    @Then("user enters selectShade product in searchBox")
+    public void User_enters_selectShade_product_in_searchBox() {
+
+        String keyword = configLoader.getProperty("selectShadeProduct");
+        guestUserPage.enterKeyword(keyword);
+        scenario.log("user Entered the keyword: " + keyword);
+    }
+
     @Then("User validates makeup label from makeup PLP")
     public void User_validates_makeup_label_from_makeup_PLP() {
 

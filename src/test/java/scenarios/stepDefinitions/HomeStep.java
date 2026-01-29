@@ -36,24 +36,37 @@ public class HomeStep {
     }
     // Home Page
     // PLP
+
     @Given("User adds a product to the wishlist from PLP")
     public void user_adds_a_product_to_the_wishlist_from_plp() {
 
         homePage.clickOnAddWishlist();
     }
+
     @Given("User validate that product added to wishlist")
     public void user_validate_that_product_added_to_wishlist() {
+
         cartPage.validateErrorMessageByPartialText("Product successfully added to your wishlist", "Product successfully added to your wishlist");
-        scenario.log("Product is added to the wishlist");
+        scenario.log("Product is added to wishlist");
     }
+
+    @Given("User validate that product added to cart")
+    public void user_validate_that_product_added_to_cart() {
+
+        cartPage.validateErrorMessageByPartialText("Product successfully added to your cart", "Product successfully added to your cart");
+        scenario.log("Product is added to cart");
+    }
+
     @Given("User remove a product to the wishlist from PLP")
     public void user_remove_a_product_to_the_wishlist_from_plp() {
 
         homePage.clickOnAddWishlist();
     }
+
     @Then("User validate that product removed from wishlist")
     public void user_validate_that_product_removed_from_wishlist() {
 
+        cartPage.validateErrorMessageByPartialText("Product has been removed from wishlist", "Product has been removed from wishlist");
         scenario.log("Removed from your wishlist");
     }
 
@@ -63,6 +76,7 @@ public class HomeStep {
 
         scenario.log("User Applying the Sort Functionality");
     }
+
     @Then("User selects a sort option as price low to high")
     public void user_selects_a_sort_option_as_price_low_to_high() {
 

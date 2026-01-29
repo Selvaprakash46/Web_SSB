@@ -170,35 +170,42 @@ public class HomePage extends BasePage{
             }
         } catch (Exception e) {}
     }
+
     public void clickOnAddWishlist() {
         isElementPresent(addWishlist);
         safeClick(addWishlist);
     }
+
     public void clickOnPriceLowToHigh() {
         isElementPresent(lowToHigh);
         safeClick(lowToHigh);
     }
+
     public void clickOnPriceHighToLow() {
         isElementPresent(highToLow);
         safeClick(highToLow);
     }
+
     public void clickOnFilterCategory() {
         isElementPresent(categoryFilter);
         safeClick(categoryFilter);
         isElementPresent(makeUpFilter);
         safeClick(makeUpFilter);
     }
+
     public void clickOnBrandsFiler() {
         isElementPresent(brandsFilter);
         safeClick(brandsFilter);
         isElementPresent(lifeFilter);
         safeClick(lifeFilter);
     }
+
     public void enterPostalCode(String str) {
         scrollDown();
         isElementPresent(pin);
         enterTextOnElement(pin, str);
     }
+
     public void clickOnChange() {
         isElementPresent(change);
         safeClick(change);
@@ -222,6 +229,5 @@ public class HomePage extends BasePage{
             return false;
         }
     }
-
 
 }

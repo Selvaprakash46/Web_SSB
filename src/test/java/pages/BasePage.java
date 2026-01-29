@@ -267,7 +267,8 @@ public class BasePage {
         try {
             WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", element);
-            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+//            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+            element.click();
         } catch (Exception e) {
             System.out.println("Failed to scroll and click using JS for locator: " + locator);
             e.printStackTrace();

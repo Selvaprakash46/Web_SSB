@@ -108,6 +108,16 @@ public class CartPageStep {
         scenario.log("Wishlist has items, continuing...");
     }
 
+    @When("user validate that wishlist is empty")
+    public void user_validate_that_wishlist_is_empty() {
+
+        if(!cartPage.isElementPresent(cartPage.emptyWishlist)) {
+            String msg = "Wishlist has products";
+            Assert.fail("Test Failed because wishlist is not empty: " + msg);
+        }
+        scenario.log("Your Wishlist is Empty");
+    }
+
     // Cart Page Components
     @When("system should display the following components on the cart page")
     public void system_should_display_the_following_components_on_the_cart_page(DataTable dataTable) throws InterruptedException {

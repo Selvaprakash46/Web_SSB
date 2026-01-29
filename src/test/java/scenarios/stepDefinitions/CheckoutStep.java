@@ -72,6 +72,7 @@ public class CheckoutStep {
 
         homePage.validateShadeOrBag();
     }
+
     @When("User clicks on another product add to bag")
     public void user_clicks_on_another_product_add_to_bag(){
 

@@ -57,6 +57,13 @@ public class WishlistStep {
         scenario.log(count + " Products Wishlisted");
     }
 
+    @When("User validates 3 wishlist product count in wishlist page")
+    public void user_validates_3_wishlist_product_count_in_wishlist_page() {
+
+        int count = wishlistPage.validateWishlistedCount(3);
+        scenario.log(count + " Products Wishlisted");
+    }
+
     @When("user validates product remove x mark in wishlist page")
     public void user_validates_product_remove_x_mark_in_wishlist_page() {
 
@@ -64,6 +71,24 @@ public class WishlistStep {
         scenario.log("Product remove x is present");
     }
 
+    @When("User adds multiple products to wishlist in PLP")
+    public void user_adds_multiple_products_to_wishlist_in_PLP() {
 
+        int count = wishlistPage.addProductsToWishlist(18);
+        scenario.log(count + " Products Wishlisted");
+    }
+
+    @When("User clicks on the add to favourite in PDP")
+    public void user_clicks_on_the_add_to_favourite_in_PDP(){
+
+        wishlistPage.clickOnAddToWishlistPDP();
+    }
+
+    @When("User deletes wishlisted products from wishlist page")
+    public void user_deletes_wishlisted_products_from_wishlist_page(){
+
+        wishlistPage.removeAllProductsFromWishlist();
+        scenario.log("Found no products/All products removed from wishlisted");
+    }
 
 }

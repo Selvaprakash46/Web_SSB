@@ -48,7 +48,7 @@ Feature: Verify the Account Module in the Application
       | PLATINUM AURA |
       | BLACK         |
 
-  @sanity @account
+  @sanity
   Scenario: Verify CRUD on the Address page
     When user clicks the Menu button for Login
     And user enters the valid mobile number

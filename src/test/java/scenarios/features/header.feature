@@ -40,7 +40,7 @@ Feature: Verify the Header Functionality
     And User clicks on the add to bag
     Then User validate cart count incremented value
 
-  @sanity @header
+  @sanity
   Scenario: Verifying strip banner and navigation to FCC page with benefits
     Given user is on the homepage
     Then user clicks strip banner logged in user
@@ -50,3 +50,10 @@ Feature: Verify the Header Functionality
       | GOLDEN GLOW   |
       | PLATINUM AURA |
       | BLACK         |
+
+  @sanity @header
+  Scenario: Verifying strip banner and navigation to FCC page with benefits
+
+
+
+
