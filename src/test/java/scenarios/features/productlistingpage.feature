@@ -10,12 +10,12 @@ Feature: Verify the product listing page Functionality
     And user validates otp result
     And system should display the appropriate login status
 
-  @sanity
+  @sanity @TC_112
   Scenario: Verifying PLP shows “Select Shade” & “Select Size” options on hovering for products with variants
     Then user enters selectShade product in searchBox
     And User validates product shade popup text
 
-  @sanity @PLP
+  @sanity @TC_113
   Scenario: Verifying variants (Select Shade & Select Size) ear on hover and function correctly
     Then user enters selectShade product in searchBox
     And User validates product shade popup text

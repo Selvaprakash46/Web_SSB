@@ -12,7 +12,6 @@ Feature: Home Page Functionality
     And user validates otp result
     And system should display the appropriate login status
 
-
   @sanity
   Scenario: Verify the Home Page Functionality
     Given user is on the homepage
