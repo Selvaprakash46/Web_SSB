@@ -37,6 +37,15 @@ public class LoginStep {
         loginPage.goTo(url);
         scenario.log("***** Web Application lunched Successfully *****");
     }
+
+    @Given("user launches application of a product")
+    public void user_launches_application_of_a_product() {
+
+        String url = configLoader.getProperty("dot&KeyProductUrl");
+        loginPage.goTo(url);
+        scenario.log("***** Product Page Of Web Application lunched Successfully *****");
+    }
+
     @When("user clicks the Menu button for Login")
     public void user_clicks_the_menu_button_for_login() {
 

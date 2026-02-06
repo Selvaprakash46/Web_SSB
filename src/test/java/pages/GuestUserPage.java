@@ -20,15 +20,22 @@ public class GuestUserPage extends BasePage{
     private final By termsAndConditions = By.xpath("//h3[contains(text(), 'TERMS & CONDITIONS')]");
     private final By search = By.xpath("//input[@placeholder='Search']");
     private final By makeUpLabel = By.xpath("//p[contains(text(), 'makeup')]");
+    private final By dotAndKeyLabel = By.xpath("//p[contains(text(), 'Dot & Key')]");
     private final By stripBanner = By.xpath("//span[contains(text(),'First Citizen Club Member')]");
     private final By stripBannerLoginUser = By.xpath("//span[contains(text(),\"You're a First Connect Member\")]");
     private final By addToBagPDP = By.xpath("//p[contains(text(),'Add To Bag')]");
     private final By highToLow = By.xpath("//p[contains(text(), 'Price: High to Low')]");
+    private final By lowToHigh = By.xpath("//p[contains(text(), 'Price: Low to High')]");
     private final By highValue = By.xpath("(//span[@class='css-1b9e2uo'])[1]");
     private final By lowValue = By.xpath("(//span[@class='css-1b9e2uo'])[6]");
     private final By brand = By.xpath("//div[contains(text(),'Brand')]");
+    private final By categories = By.xpath("//div[contains(text(),'Categories')]");
     private final By arceliaBrand = By.xpath("//h6[contains(text(),'Arcelia')]");
+    private final By sugarBrand = By.xpath("//h6[contains(text(),'SUGAR')]");
+    private final By faceBrand = By.xpath("(//h6[contains(text(),'Face')])[1]");
     private final By arceliaLabel = By.xpath("//span[contains(text(),'Arcelia')]");
+    private final By faceLabel = By.xpath("//span[contains(text(),'Face')]");
+    private final By sugarLabel = By.xpath("//span[contains(text(),'SUGAR')]");
     private final By firstProductWishlist = By.xpath("(//*[name()='svg'][@class='css-ksipev'])[1]");
     private final By addProductWishlist = By.xpath("//div[@class='MuiBox-root css-0']/div[@class='css-6wmeao']");
     private final By LoginClose = By.xpath("//button[@aria-label='close']");
@@ -72,6 +79,12 @@ public class GuestUserPage extends BasePage{
         validateElementText(makeUpLabel, "Makeup");
     }
 
+    public void validateDotAndKeyPLP() {
+
+        isElementPresent(dotAndKeyLabel);
+        validateElementText(dotAndKeyLabel, "Dot & Key");
+    }
+
     public void clickOnStripBanner() {
         isElementPresent(stripBanner);
         safeClick(stripBanner);
@@ -84,6 +97,7 @@ public class GuestUserPage extends BasePage{
 
     public void switchToProductWindow() {
         switchToNewWindow();
+        waitFor(2);
     }
 
     public void clickOnAddTCartPDP() {
@@ -98,14 +112,37 @@ public class GuestUserPage extends BasePage{
         waitFor(2);
     }
 
+    public void clickOnLowToHighSortBy() {
+        isElementPresent(lowToHigh);
+        safeClick(lowToHigh);
+        waitFor(2);
+    }
+
     public void clickOnArceliaBrand() {
         isElementPresent(arceliaBrand);
         safeClick(arceliaBrand);
     }
 
+    public void clickOnSugarBrand() {
+        isElementPresent(sugarBrand);
+        safeClick(sugarBrand);
+        waitFor(2);
+    }
+
+    public void clickOnFaceBrand() {
+        isElementPresent(faceBrand);
+        safeClick(faceBrand);
+    }
+
     public void clickOnBrandFilter() {
         isElementPresent(brand);
         safeClick(brand);
+    }
+
+    public void clickOnCategoriesFilter() {
+        waitFor(2);
+        isElementPresent(categories);
+        safeClick(categories);
     }
 
     public void clickOnFirstProductWishlist() {
@@ -127,11 +164,31 @@ public class GuestUserPage extends BasePage{
         isElementPresent(arceliaLabel);
     }
 
+    public void validateFaceLabel() {
+        isElementPresent(faceLabel);
+    }
+
+    public void validateSugarLabel() {
+        isElementPresent(sugarLabel);
+    }
+
     public void validateHighToLowSortBy() {
         double firstValue = getNumericValue(highValue);
+        System.out.println("FirstValue: " + firstValue);
         double secondValue = getNumericValue(lowValue);
+        System.out.println("SecondValue: " + secondValue);
 
         Assert.assertTrue(firstValue > secondValue, "Sorting failed: First value is not greater than second value"
+        );
+    }
+
+    public void validateLowToHighSortBy() {
+        double firstValue = getNumericValue(highValue);
+        System.out.println("FirstValue: " + firstValue);
+        double secondValue = getNumericValue(lowValue);
+        System.out.println("SecondValue: " + secondValue);
+
+        Assert.assertTrue(firstValue < secondValue, "Sorting failed: First value is not less than second value"
         );
     }
 

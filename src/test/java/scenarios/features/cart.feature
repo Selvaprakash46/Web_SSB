@@ -66,7 +66,7 @@ Feature: Verify the Cart Page Functionality
     And user removes a product to the wishlist from the cart
     And user validate that product removed from cart
 
-  @smoke @sanity @TC020 @cart
+  @smoke @sanity @TC020
   Scenario: Verify functionality of invalid postal code check on the cart page
     Given user is on the homepage
     When user clicks on the cart icon in the header
@@ -87,7 +87,7 @@ Feature: Verify the Cart Page Functionality
     When User clicks on the proceed to pay
     When user enters the postal code
 
-  @sanity @TC_163
+  @Regression @TC_163
   Scenario: Verify Move to Wishlist functionality
     Given user is on the homepage
     When user selects a makeup category from home page
@@ -97,13 +97,13 @@ Feature: Verify the Cart Page Functionality
     When user clicks on the wishlist icon in the header
     And user validate that wishlist is not empty
 
-  @sanity @TC_172
+  @Regression @TC_172
   Scenario: Verify to ensure redirect to Home via SSB logo
     Given user is on the homepage
     When user clicks on the cart icon in the header
     And user clicks SSBeauty logo to return to homepage
 
-  @sanity @TC_174
+  @Regression @TC_174
   Scenario: Verify View All on Wishlist widget redirects correctly
     Given user is on the homepage
     When user clicks on the cart icon in the header

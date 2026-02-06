@@ -10,7 +10,7 @@ Feature: Verify the wishlist Functionality
     And user validates otp result
     And system should display the appropriate login status
 
-  @sanity @TC_151
+  @Regression @TC_151
   Scenario: Verifying all the components in homepage for guest user
     When user selects a makeup category from home page
     And user clicks the sub category from makeup page
@@ -38,7 +38,7 @@ Feature: Verify the wishlist Functionality
 #    And User adds a product to the wishlist from PLP
 #    And User validate that it navigates to the PDP
 
-  @sanity @TC_152
+  @Regression @TC_152
   Scenario: Verifying user remove wishlist items from PDP, PLP, and Wishlist page
     When user selects a makeup category from home page
     And user clicks the sub category from makeup page
@@ -48,7 +48,7 @@ Feature: Verify the wishlist Functionality
 
 
 
-  @sanity @TC_153
+  @Regression @TC_153
   Scenario: Verifying user can add products to wishlist from all supported surfaces
     When user selects a makeup category from home page
     And user clicks the sub category from makeup page
@@ -67,7 +67,7 @@ Feature: Verify the wishlist Functionality
     Then User validates 3 wishlist product count in wishlist page
     And User deletes wishlisted products from wishlist page
 
-  @sanity @TC_154
+  @Regression @TC_154
   Scenario: Verifying user can remove wishlist items from PDP, PLP, and Wishlist page
     When user selects a makeup category from home page
     And user clicks the sub category from makeup page
@@ -89,7 +89,7 @@ Feature: Verify the wishlist Functionality
   Scenario: Verifying OOS
 
 
-  @sanity @TC_157
+  @Regression @TC_157
   Scenario: Verifying user can open PDP from Wishlist & add wishlist items to cart
     When user selects a makeup category from home page
     And user clicks the sub category from makeup page

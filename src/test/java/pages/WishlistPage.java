@@ -21,6 +21,7 @@ public class WishlistPage extends BasePage {
     private final By emptyCartBtn = By.xpath("(//div[@class='MuiBox-root css-1dy8gno'])[2]");
     private final By removeWishlist = By.xpath("//*[name()='svg' and contains(@class,'css-1exo64a')]");
     private final By addToWishlistPDP = By.xpath("//div[@class='css-6wmeao']//*[name()='svg']");
+    private final By shareIconPDP = By.xpath("(//div[@class='MuiStack-root css-ehoejh']//*[name()='svg'])[1]");
     private final By removeAllWishlist = By.xpath("//div[contains(@class,'css-shd5b')]//*[name()='svg']");
     private final By removeItemBtn = By.xpath("(//p[contains(text(),'Remove Item')])[2]");
 
@@ -100,6 +101,11 @@ public class WishlistPage extends BasePage {
         waitFor(2);
     }
 
+    public void clickOnShareIconPDP() {
+        isElementPresent(shareIconPDP);
+        safeClick(shareIconPDP);
+    }
+
     public void removeAllProductsFromWishlist() {
         List<WebElement> removeButtons = driver.findElements(removeAllWishlist);
         int count = removeButtons.size();
@@ -131,5 +137,7 @@ public class WishlistPage extends BasePage {
             waitFor(2);
         }
     }
+
+
 
 }

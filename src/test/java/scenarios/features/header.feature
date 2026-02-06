@@ -32,7 +32,7 @@ Feature: Verify the Header Functionality
     And User clicks on trending products
 #    And User validate that search option navigation to the relevant products
 
-  @sanity @TC_026
+  @Regression @TC_026
   Scenario: Verifying count on the cart icon on the header across all pages
     When user selects a makeup category from home page
     And user clicks the sub category from makeup page
@@ -40,7 +40,7 @@ Feature: Verify the Header Functionality
     And User clicks on the add to bag
     Then User validate cart count incremented value
 
-  @sanity @TC_031
+  @Regression @TC_031
   Scenario: Verifying strip banner and navigation to FCC page with benefits
     Given user is on the homepage
     Then user clicks strip banner logged in user

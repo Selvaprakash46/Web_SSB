@@ -84,6 +84,12 @@ public class WishlistStep {
         wishlistPage.clickOnAddToWishlistPDP();
     }
 
+    @When("User clicks on the share icon in PDP")
+    public void user_clicks_on_the_share_icon_in_PDP(){
+
+        wishlistPage.clickOnShareIconPDP();
+    }
+
     @When("User deletes wishlisted products from wishlist page")
     public void user_deletes_wishlisted_products_from_wishlist_page(){
 

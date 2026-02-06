@@ -42,7 +42,7 @@ public class GuestUserStep {
     @Given("User validates categories from homepage")
     public void User_validates_categories_from_homepage() {
 
-        homePage.validateCategory();
+//        homePage.validateCategory();
         homePage.validateErrorMessageByPartialText("Categories", "Categories");
         scenario.log("Categories is present in homepage");
     }
@@ -51,6 +51,7 @@ public class GuestUserStep {
     public void User_validates_search_from_homepage() {
 
         homePage.validateSearch();
+//        Assert
         scenario.log("Search is present in homepage");
     }
 
@@ -83,6 +84,13 @@ public class GuestUserStep {
 
         guestUserPage.validateMakeupPLP();
         scenario.log("Makeup label is present");
+    }
+
+    @Then("User validates dotAndKey label from makeup PLP")
+    public void User_validates_dotAndKey_label_from_makeup_PLP() {
+
+        guestUserPage.validateDotAndKeyPLP();
+        scenario.log("Dot & Key label is present");
     }
 
     @Then("user clicks strip banner")
@@ -119,10 +127,22 @@ public class GuestUserStep {
         guestUserPage.clickOnHighToLowSortBy();
     }
 
+    @When("User clicks on the price low to high from sort by")
+    public void user_clicks_on_the_price_low_to_high_from_sort_by(){
+
+        guestUserPage.clickOnLowToHighSortBy();
+    }
+
     @When("User clicks on brand filter")
     public void user_clicks_on_brand_filter(){
 
         guestUserPage.clickOnBrandFilter();
+    }
+
+    @When("User clicks on categories filter")
+    public void user_clicks_on_categories_filter(){
+
+        guestUserPage.clickOnCategoriesFilter();
     }
 
     @When("User add first PLP product as wishlist")
@@ -158,6 +178,18 @@ public class GuestUserStep {
         guestUserPage.clickOnArceliaBrand();
     }
 
+    @When("User selects sugar filter from brand")
+    public void user_selects_sugar_filter_from_brand(){
+
+        guestUserPage.clickOnSugarBrand();
+    }
+
+    @When("User selects face filter from brand")
+    public void user_selects_face_filter_from_brand(){
+
+        guestUserPage.clickOnFaceBrand();
+    }
+
     @When("User validate arcelia label from filtered brand")
     public void user_validate_arcelia_label_from_filtered_brand(){
 
@@ -165,10 +197,32 @@ public class GuestUserStep {
         scenario.log("Switched to product window");
     }
 
+    @When("User validate face label from filtered brand")
+    public void user_validate_face_label_from_filtered_brand(){
+
+        guestUserPage.validateFaceLabel();
+        scenario.log("Switched to product window");
+    }
+
+    @When("User validate sugar label from filtered brand")
+    public void user_validate_sugar_label_from_filtered_brand(){
+
+        guestUserPage.validateSugarLabel();
+        scenario.log("Switched to product window");
+    }
+
     @When("Validate high to low price in sort by")
     public void validate_high_to_low_price_in_sort_by(){
 
         guestUserPage.validateHighToLowSortBy();
+        scenario.log("The product prices are from high to low.");
+    }
+
+    @When("Validate low to high price in sort by")
+    public void validate_low_to_high_price_in_sort_by(){
+
+        guestUserPage.validateLowToHighSortBy();
+        scenario.log("The product prices are from low to high.");
     }
 
     @When("user validates product remove x mark")

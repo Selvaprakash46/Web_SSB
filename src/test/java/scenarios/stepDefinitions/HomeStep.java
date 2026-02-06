@@ -6,10 +6,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pages.AccountPage;
-import pages.CartPage;
-import pages.HomePage;
-import pages.LoginPage;
+import pages.*;
 import utilities.ConfigLoader;
 import utilities.CredsLoader;
 
@@ -20,6 +17,7 @@ public class HomeStep {
     LoginPage loginPage;
     HomePage homePage;
     CartPage cartPage;
+    ProductDetailPage productDetailPage;
     CredsLoader credsLoader;
     ConfigLoader configLoader;
     Scenario scenario;
@@ -30,6 +28,7 @@ public class HomeStep {
         accountPage = new AccountPage(context.driver);
         homePage = new HomePage(context.driver);
         cartPage = new CartPage(context.driver);
+        productDetailPage = new ProductDetailPage(context.driver);
         this.credsLoader = context.credsLoader;
         this.configLoader = context.configLoader;
         this.scenario = context.scenario;
@@ -54,7 +53,14 @@ public class HomeStep {
     public void user_validate_that_product_added_to_cart() {
 
         cartPage.validateErrorMessageByPartialText("Product successfully added to your cart", "Product successfully added to your cart");
-        scenario.log("Product is added to cart");
+        scenario.log("Product is added to the cart");
+    }
+
+    @Given("User validate that product added to cart from PDP")
+    public void user_validate_that_product_added_to_cart_from_PDP() {
+
+        productDetailPage.ValidateProductAddedToCart();
+        scenario.log("Product is added to the cart");
     }
 
     @Given("User remove a product to the wishlist from PLP")
@@ -131,11 +137,13 @@ public class HomeStep {
         homePage.enterPostalCode(pin);
         scenario.log("User Entered the Postal Code: " + pin);
     }
+
     @When("user clicks on the check option")
     public void user_clicks_on_the_check_option() {
 
         homePage.clickOnChange();
     }
+
     @When("user sees a message indicating to enter a valid postal code")
     public void user_sees_a_message_indicating_to_enter_a_valid_postal_code() {
 

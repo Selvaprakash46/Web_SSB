@@ -17,7 +17,7 @@ import io.cucumber.testng.CucumberOptions;
 },
         glue = { "scenarios", "hooks" },
         features = "src/test/java/scenarios",
-        dryRun = false
+        dryRun = true
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
 

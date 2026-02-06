@@ -166,9 +166,36 @@ public class BasePage {
         try {
             WebElement element = driver.findElement(locator);
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+            highlightElement(locator);
+
         } catch (Exception e) {
             Assert.fail("Error while scrolling to element: " + locator.toString());
             e.printStackTrace();
+        }
+    }
+
+    public void scrollTillElement(By locator) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", element);
+        highlightElements(element);
+    }
+
+    public void scrollEndOfPage() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+    }
+
+    public void highlightElement(By locator) {
+        WebElement element = driver.findElement(locator);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].style.border='2px solid red';", element);
+    }
+
+    public void highlightElements(WebElement element) {
+        try {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='2px solid red';", element);
+        } catch (JavascriptException | StaleElementReferenceException e) {
+            System.out.println("Could not highlight element: " + e.getMessage());
         }
     }
 
@@ -192,6 +219,7 @@ public class BasePage {
         } catch (Exception e) {
             Assert.fail("Failed to validate error message for partial text: '" + partialText + "' - " + e.getMessage());
         }
+        waitFor(2);
     }
 
     public void safeClick(By b) {
@@ -269,6 +297,16 @@ public class BasePage {
             ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", element);
 //            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
             element.click();
+        } catch (Exception e) {
+            System.out.println("Failed to scroll and click using JS for locator: " + locator);
+            e.printStackTrace();
+        }
+    }
+
+    public void scrollIntoElementUsingJS(By locator) {
+        try {
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", element);
         } catch (Exception e) {
             System.out.println("Failed to scroll and click using JS for locator: " + locator);
             e.printStackTrace();
